@@ -35,7 +35,7 @@ remDupl([X, Xs], [X|Xd]):-
 remDupl([], []).
 
 %19.
-remDupl1([X|Xs], Xd):-
+remDupl1([X|Xs], [X|Xd]):-
     member(X,Xs),
     select(X,X2, X3),
     remDupl1(X0, Xd).
