@@ -22,9 +22,9 @@ duplicados([_|Xs]):-
 
 %17.
 % trocaPU([a,b,c], X).
-trocaPU(Lpu, Lup): -
+trocaPU(Lpu, Lup):-
     append([P|M], [U], Lpu),
-    append([U|M], [P], Lup)
+    append([U|M], [P], Lup).
 
 %18.
 remDupl([X|Xs], Xd):-
@@ -41,7 +41,7 @@ remDupl1([X|Xs], [X|Xd]):-
     select(X, Xs, Xd),
     remDupl1(Xs, Xd).
 remDupl1([X|Xs], [X|Xd]):-
-    remDupl2(Xs, Xd).
+    remDupl1(Xs, Xd).
 remDupl1([], []).
 
 
@@ -57,7 +57,8 @@ remove(X, [], []).
 % flatten1([1,[2], [], [2,[3,4], 5], 6], X).
 flatten1([], []).
 flatten1(X, [X]):-
-    -X\=[], X\=[_|_].
+    X\=[],
+    X\=[_|_].
 flatten1([X, Xs], F):-
     flatten1(X, F1),
     flatten1(Xs, F2),
@@ -82,3 +83,36 @@ reverse2(L, [], R).
 reverse2([], R, R).
 reverse2([X|Xs], ACC, R):-
     reverse2(Xs, [X|ACC], R).
+
+%26
+palindrome(L):-
+    append([P|M], [U], L),
+    P=U,
+    palindrome(M).
+
+%27.
+% palindrome1([a,b,c,c,b,a])
+palindrome1(X):-
+    reverse(X, Xr),
+    X=Xr.
+
+%28
+% metadesiguais([a,b,c,a,b,c])
+metadesiguais(L):-
+    append(M, M, L)
+
+%30.
+% interseccao([b,c,d], [d,a,b,c,k], I).
+interseccao([], X, []).
+interseccao([X|Xs], Y, [X|Is]):- member(X, Y), interseccao(Xs, Y, Is).
+interseccao([X|Xs], Y, Is):- \+ member(X, Y), interseccao(Xs, Y, Is).
+
+%31
+% uniao([b,c,d], [d,a,b,c,k], I).
+uniao([X|Xs], Y, [X|Us]):-
+    \+ member(X, Y),
+    uniao(Xs, Y, Us).
+uniao([X|Xs], Y, Us):-
+    member(X, Y),
+    uniao(Xs, Y, Us).
+uniao([], Y, Y).
