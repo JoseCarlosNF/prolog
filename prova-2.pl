@@ -74,7 +74,7 @@ zipper([], [], []).
 % permutation([a,b,c], P).
 permutation(Xs, [Z|Zs]):-
     select(Z, Xs, Ys),
-    permutation(Ys Zs).
+    permutation(Ys, Zs).
 permutation([], []).
 
 %24.
@@ -99,7 +99,7 @@ palindrome1(X):-
 %28
 % metadesiguais([a,b,c,a,b,c])
 metadesiguais(L):-
-    append(M, M, L)
+    append(M, M, L).
 
 %30.
 % interseccao([b,c,d], [d,a,b,c,k], I).
